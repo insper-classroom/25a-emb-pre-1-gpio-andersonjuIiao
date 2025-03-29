@@ -8,9 +8,6 @@
  const int BTN_PIN_R = 28;
  const int BTN_PIN_G = 26;  
 
- int CTR_R = 0;
- int CTR_G = 0;
-
  int main() {
    stdio_init_all();
 
@@ -30,14 +27,12 @@
  
    while (true) {
     if (!gpio_get(BTN_PIN_R)) {
-      CTR_R = !CTR_R;
-      gpio_put(LED_PIN_R, !CTR_R);
+      gpio_put(LED_PIN_R, !gpio_get(LED_PIN_R));
       while (!gpio_get(BTN_PIN_R)) {
       };
     }
     if (!gpio_get(BTN_PIN_G)) {
-      CTR_G = !CTR_G;
-      gpio_put(LED_PIN_G, CTR_G);
+      gpio_put(LED_PIN_G, !gpio_get(LED_PIN_G));
       while (!gpio_get(BTN_PIN_G)) {
       };
     }
