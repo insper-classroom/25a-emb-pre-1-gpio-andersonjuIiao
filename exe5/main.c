@@ -15,32 +15,23 @@ int main() {
     gpio_init(BTN_PIN_2);
     gpio_set_dir(BTN_PIN_2, GPIO_IN);
     gpio_pull_up(BTN_PIN_2);
-
     int cnt_1 = 0;
     int cnt_2 = 0;
-    
+
     while (true) {
-        // Verifica Botão 1
-        if (!gpio_get(BTN_PIN)) {  // Botão pressionado
-            sleep_ms(20); // Delay curto para debounce
-            // Aguarda liberação do botão para evitar múltiplas detecções
-            while (!gpio_get(BTN_PIN)) {
-                sleep_ms(10);
-            }
+
+        if (!gpio_get(BTN_PIN)) {
+            sleep_ms(500);
             printf("Botao 1: %d\n", cnt_1++);
-            sleep_ms(450); // Delay extra para evitar repetições indesejadas
+            while (!gpio_get(BTN_PIN)) {
+            };
         }
 
-        // Verifica Botão 2
-        if (!gpio_get(BTN_PIN_2)) {  // Botão pressionado
-            sleep_ms(20); // Delay curto para debounce
-            while (!gpio_get(BTN_PIN_2)) {
-                sleep_ms(10);
-            }
+        if (!gpio_get(BTN_PIN_2)) {
+            sleep_ms(500);
             printf("Botao 2: %d\n", cnt_2++);
-            sleep_ms(450);
+            while (!gpio_get(BTN_PIN_2)) {
+            };
         }
     }
-    
-    return 0;
 }
